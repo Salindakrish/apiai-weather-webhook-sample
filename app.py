@@ -36,6 +36,9 @@ def webhook():
 
 
 def processRequest(req):
+    if req.get("result").get("action") == 'expenses':
+        res = makeExpences(req)
+        return res
     if req.get("result").get("action") != "yahooWeatherForecast":
         return {}
     baseurl = "https://query.yahooapis.com/v1/public/yql?"
@@ -98,7 +101,15 @@ def makeWebhookResult(data):
         "source": "apiai-weather-webhook-sample"
     }
 
-
+    def makeExpences(req):
+        speech = you have dollar 150 cost
+        return {
+        "speech": speech,
+        "displayText": speech,
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-weather-webhook-sample"
+         }
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
 
