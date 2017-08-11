@@ -101,8 +101,8 @@ def makeWebhookResult(data):
         "source": "apiai-weather-webhook-sample"
     }
 
-    def makeExpences(req):
-        speech = you have dollar 150 cost
+def makeExpences(req):
+        speech = "you have dollar 150 cost"
         return {
         "speech": speech,
         "displayText": speech,
