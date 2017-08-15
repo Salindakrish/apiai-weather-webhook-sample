@@ -40,9 +40,6 @@ def processRequest(req):
     if req.get("result").get("action") == 'expenses':
         res = makeExpences(req)
         return res
-    if req.get("result").get("action") == 'telltime':
-        res = telltime(req)
-        return res
     if req.get("result").get("action") != "yahooWeatherForecast":
         return {}
     baseurl = "https://query.yahooapis.com/v1/public/yql?"
