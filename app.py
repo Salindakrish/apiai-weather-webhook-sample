@@ -10,6 +10,7 @@ from urllib.error import HTTPError
 
 import json
 import os
+import datetime as time
 
 from flask import Flask
 from flask import request
@@ -38,6 +39,9 @@ def webhook():
 def processRequest(req):
     if req.get("result").get("action") == 'expenses':
         res = makeExpences(req)
+        return res
+    if req.get("result").get("action") == 'telltime':
+        res = telltime(req)
         return res
     if req.get("result").get("action") != "yahooWeatherForecast":
         return {}
@@ -100,6 +104,17 @@ def makeWebhookResult(data):
         # "contextOut": [],
         "source": "apiai-weather-webhook-sample"
     }
+def telltime(req):
+    currentTime = time.datetime.now()
+    speech = "the current time is "+currentTime.time()
+    return {
+        "speech": speech,
+        "displayText": speech,
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-weather-webhook-sample"
+         }
+
 
 def makeExpences(req):
         speech = "you have dollar 150 cost"
@@ -116,3 +131,5 @@ if __name__ == '__main__':
     print("Starting app on port %d" % port)
 
     app.run(debug=False, port=port, host='0.0.0.0')
+
+
